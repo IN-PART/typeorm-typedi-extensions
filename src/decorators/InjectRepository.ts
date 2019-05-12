@@ -1,15 +1,16 @@
-import { ConnectionManager, Repository, TreeRepository, MongoRepository } from "typeorm";
-import { Container } from "typedi";
+import { Container, ContainerInstance } from "typedi";
+import { ConnectionManager, MongoRepository, Repository, TreeRepository } from "typeorm";
 
 import { EntityTypeMissingError } from "../errors/EntityTypeMissingError";
-import { PropertyTypeMissingError } from "../errors/PropertyTypeMissingError";
 import { ParamTypeMissingError } from "../errors/ParamTypeMissingError";
+import { PropertyTypeMissingError } from "../errors/PropertyTypeMissingError";
 
 /**
  * Helper to avoid V8 compilation of anonymous function on each call of decorator.
  */
-function getRepository(connectionName: string, repositoryType: Function, entityType: Function) {
-    const connectionManager = Container.get(ConnectionManager);
+function getRepository(connectionName: string, repositoryType: Function, entityType: Function, containerInstance: ContainerInstance) {    
+    const connectionManager = containerInstance.get(ConnectionManager);
+    
     if (!connectionManager.has(connectionName)) {
         throw new Error(
             `Cannot get connection "${connectionName}" from the connection manager. ` +
@@ -156,7 +157,7 @@ export function InjectRepository(entityTypeOrConnectionName?: Function|string, p
             index,
             object,
             propertyName,
-            value: () => getRepository(connectionName, repositoryType, entityType!),
+            value: (containerInstance) => getRepository(connectionName, repositoryType, entityType!, containerInstance),
         });
     };
 }
