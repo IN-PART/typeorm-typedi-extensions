@@ -1,5 +1,5 @@
-import {ConnectionManager} from "typeorm";
 import {Container} from "typedi";
+import {ConnectionManager} from "typeorm";
 
 /**
  * Allows to inject an EntityManager using typedi's Container.

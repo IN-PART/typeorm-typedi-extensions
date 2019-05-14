@@ -2,8 +2,8 @@ import { ConnectionManager, Repository, TreeRepository, MongoRepository } from "
 import { Container, ContainerInstance } from "typedi";
 
 import { EntityTypeMissingError } from "../errors/EntityTypeMissingError";
-import { PropertyTypeMissingError } from "../errors/PropertyTypeMissingError";
 import { ParamTypeMissingError } from "../errors/ParamTypeMissingError";
+import { PropertyTypeMissingError } from "../errors/PropertyTypeMissingError";
 
 /**
  * Helper to avoid V8 compilation of anonymous function on each call of decorator.
