@@ -1,5 +1,5 @@
 {
-  "name": "typeorm-typedi-extensions",
+  "name": "@in-part/fork-typeorm-typedi-extensions",
   "version": "0.2.2",
   "description": "Dependency injection and service container integration with TypeORM using TypeDI library.",
   "license": "MIT",
